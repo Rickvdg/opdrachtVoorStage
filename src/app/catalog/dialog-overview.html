@@ -1,0 +1,33 @@
+<h3>Bier toevoegen/veranderen</h3>
+<br>
+<form>
+  <mat-form-field>
+    <input matInput disabled type="text" class="form" placeholder="id" name="id" value="{{data.id}}" #id/>
+  </mat-form-field><br>
+  <mat-form-field class="mat-form-field inputs">
+    <input matInput type="text" class="form" placeholder="Naam" name="naam" value="{{data.Bier}}" #naam/>
+  </mat-form-field><br>
+  <mat-form-field class="mat-form-field inputs">
+    <input matInput type="text" class="form" placeholder="Stijl" name="stijl" value="{{data.Stijl}}" #stijl/>
+  </mat-form-field><br>
+  <mat-form-field class="mat-form-field inputs">
+    <input matInput type="text" class="form" placeholder="Stamwortgehalte" name="stamwortgehalte" value="{{data.Stamwortgehalte}}" #stamwortgehalte/>
+  </mat-form-field><br>
+  <mat-form-field class="mat-form-field inputs">
+    <input matInput type="text" class="form" placeholder="Alcoholpercentage" name="alcoholpercentage" value="{{data.Alcoholpercentage}}" #alcoholpercentage/>
+  </mat-form-field><br>
+  <mat-form-field class="mat-form-field inputs">
+    <input matInput type="text" class="form" placeholder="Gisting" name="gisting" value="{{data.Gisting}}" #gisting/>
+  </mat-form-field><br>
+  <mat-form-field class="mat-form-field inputs">
+    <input matInput type="text" class="form" placeholder="Sinds" name="sinds" value="{{data.Sinds}}" #sinds/>
+  </mat-form-field><br>
+  <mat-form-field class="mat-form-field inputs">
+    <input matInput type="text" class="form" placeholder="Brouwerij" name="brouwerij" value="{{data.Brouwerij}}" #brouwerij/>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button (click)="onNoClick()">Annuleren</button>
+  <button mat-raised-button color="primary" *ngIf="id.value == null || id.value == ''"  (click)="addBeer(0,naam.value,stijl.value,stamwortgehalte.value,alcoholpercentage.value,gisting.value,sinds.value,brouwerij.value)">Toevoegen</button>
+  <button mat-raised-button color="primary" *ngIf="id.value != ''"  (click)="changeBeer(id.value,naam.value,stijl.value,stamwortgehalte.value,alcoholpercentage.value,gisting.value,sinds.value,brouwerij.value)">Veranderen</button>
+  <button mat-raised-button color="warn" *ngIf="id.value != ''" (click)="deleteBeer(id.value)">Verwijderen</button>
+</form><br>

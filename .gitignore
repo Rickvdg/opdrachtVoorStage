@@ -40,3 +40,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/node_modules_backup.zip
+/node_modules/
+/e2e/

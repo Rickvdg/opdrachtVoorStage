@@ -1,0 +1,73 @@
+<div class="container">
+  <app-navbar></app-navbar>
+
+  <div class="row">
+    <div class="col-lg-3 rounded">
+      <div class="rounded filters">
+        <div style="margin-left: 10px;"><br>
+          <div *ngIf="auth.isLoggedIn()">
+            <button mat-raised-button color="primary" class="inputs" (click)="openDialog()">Bier toevoegen</button><br>
+          </div>
+          <h3>Filters:</h3>
+          <button mat-raised-button color="primary" class="inputs" (click)="standaardZoekTermen()">Standaard zoekwaardes</button>
+          <form>
+            <mat-form-field class="mat-form-field inputs">
+              <input matInput type="text" class="form" placeholder="Zoek op naam" [(ngModel)]="searchString" name="searchString"/>
+              <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="searchString=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field><br>
+            <mat-form-field class="mat-form-field inputs">
+              <input matInput type="text" class="form" placeholder="Zoek op stijl" [(ngModel)]="searchStijl" name="searchStijl"/>
+              <button mat-button *ngIf="searchStijl" matSuffix mat-icon-button aria-label="Clear" (click)="searchStijl=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field><br>
+            <mat-form-field class="mat-form-field inputs">
+              <input matInput type="text" class="form" placeholder="Zoek op brouwerij" [(ngModel)]="searchBrouwerij" name="searchBrouwerij"/>
+              <button mat-button *ngIf="searchBrouwerij" matSuffix mat-icon-button aria-label="Clear" (click)="searchBrouwerij=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Gisting" class="inputs" name="searchGisting" [(ngModel)]="searchGisting">
+                <mat-option *ngFor="let gist of gisting" [value]="gist.toString()">{{ gist.toString() }}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <div><b>Max alcoholpercentage:</b></div>
+            0<mat-slider class="inputs" [(ngModel)]="maxPercentage" name="maxPercentage" min="0" max="15" step="0.5" value="6.5" thumbLabel ></mat-slider>10<br>
+            <div><b>Minimaal sinds: </b></div>
+            1700<mat-slider style="width: 65%" [(ngModel)]="minSinds" name="minSinds" min="1700" max="2020" step="20" value="1800" thumbLabel ></mat-slider>2020
+          </form><br>
+        </div>
+      </div>
+    </div>
+    <div class="col rounded">
+      <table  matSort (matSortChange)="sortData($event)" class="table table-dark table-hover">
+        <thead class="thead-light">
+        <tr>
+          <th mat-sort-header="Bier">Bier naam</th>
+          <th mat-sort-header="Stijl">Stijl</th>
+          <th mat-sort-header="Alcoholpercentage">Alcoholpercentage</th>
+          <th mat-sort-header="Brouwerij">Brouwerij</th>
+          <th mat-sort-header="Gisting">Gisting</th>
+          <th mat-sort-header="Sinds">Sinds</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let bier of sortedData | filter : 'Bier' : searchString | filter : 'Stijl' : searchStijl | filter : 'Brouwerij' : searchBrouwerij | filter : 'Gisting' : searchGisting | filterNumber : 'Alcoholpercentage' : maxPercentage | filterNumber : 'Sinds' : minSinds ; let i = index">
+          <td>{{ bier.Bier }}</td>
+          <td>{{ bier.Stijl }}</td>
+          <td>{{ bier.Alcoholpercentage }}</td>
+          <td>{{ bier.Brouwerij }}</td>
+          <td>{{ bier.Gisting }}</td>
+          <td>{{ bier.Sinds }}</td>
+          <td><button mat-raised-button *ngIf="auth.isLoggedIn()" (click)="openDialog(bier.id,bier.Bier,bier.Stijl,bier.Stamwortgehalte,bier.Alcoholpercentage,bier.Gisting,bier.Sinds,bier.Brouwerij)">Edit</button></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>

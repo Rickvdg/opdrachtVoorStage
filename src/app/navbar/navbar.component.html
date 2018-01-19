@@ -1,0 +1,23 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded rounded" style="margin-bottom: 20px;">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/home">
+    <img src="../../assets/PastedGraphic-3.png" style="margin-right: 10px;" height="30" class="d-inline-block align-top antialiasingoff" alt="">
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="/home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink="/catalog" routerLinkActive="active">Catalogus</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <button type="button" class="btn btn-outline-primary" (click)="auth.login()" *ngIf="!auth.isLoggedIn()">Login</button>
+      <button type="button" class="btn btn-outline-primary" (click)="auth.logout()" *ngIf="auth.isLoggedIn()">Logout</button>
+    </form>
+  </div>
+</nav>
